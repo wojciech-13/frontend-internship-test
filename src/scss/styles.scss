@@ -2,9 +2,12 @@
 @import 'layout/main';
 
 $popupBackground: white;
-$inputsFontSize: 11px;
 $buttonsBackground: black;
 $buttonsColor: white;
+$submitHoverBackground: #FD878E;
+
+$inputsTextFont: 11px;
+
 
 .buttons{
 background: $buttonsBackground;
@@ -40,7 +43,6 @@ cursor: pointer;
         font-size: 11px;
         font-weight: bold;
     }
-
     form{
         display: flex;
         flex-direction: column;
@@ -56,20 +58,44 @@ cursor: pointer;
         input {
             padding: 12px;
             margin: 9px;
-            font-size: $inputsFontSize;
+            font-size: $inputsTextFont;
             border: 1px solid rgb(80, 80, 80);
             outline: 0;
         }
         input[type=submit]{
             @extend .buttons;
             text-transform: uppercase;
+
+            &:hover {
+                background: $submitHoverBackground;
+            }
         }
-        label{
-            font-size: 12px;
+        input[type=checkbox] {
+            display: none;
+
+            + label {
+                position: relative;
+                padding-left: 36px;
+                font-size: 12px;
+                margin: 8px 0px;
+            }
+            + label:before {
+                position: absolute;
+                content: '';
+                display: block;
+                width: 12px;
+                height: 12px;
+                top: 1px;
+                left: 10px;
+                cursor: pointer;
+                border: 1px solid black;
+            }
+            &:checked + label:before {
+                background: black;
+            }
         }
     }
 }
-
 .show{
     display: block;
 }
