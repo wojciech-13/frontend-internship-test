@@ -1,32 +1,51 @@
 /* Here goes your JS code */
-const button = document.querySelector('.btn');
+const clickMeBtn = document.querySelector('.btn');
 const popup = document.querySelector('.popup');
 const closeBtn = document.querySelector('.closeBtn');
 const form = document.querySelector('.form');
+const successMessage = document.querySelector('.successMessage');
+const error = document.querySelector('.error');
 
-console.log(form);
-console.log(form.email);
-function toggleClass() {
+function showPopup() {
     popup.classList.toggle('show');
+    clickMeBtn.classList.toggle('hide');
+}
+function closePopup() {
+    popup.classList.toggle('show');
+    clickMeBtn.classList.toggle('hide');
 }
 
-function validateForm(e) {
-    if(this.email.value === ""){
-        e.preventDefault();
-        alert('E-mail field can not be empty');
+
+function afterSubmit(e){
+    const isCheckboxValid = this.checkbox.checked;
+    const isPasswordValid = this.password.value;
+    const isEmailValid = this.email.value;
+
+    /* Form Validation */
+    e.preventDefault();
+    if(this.email.value === "" || this.password.value === "" || !this.checkbox.checked){
+        if(!this.checkbox.checked){
+            error.innerHTML = ('You must agree to the terms');
+        }
+        if(this.password.value === ""){
+            error.innerHTML = ('Password field can not be empty');
+        }
+        if(this.email.value === ""){
+            error.innerHTML = 'E-mail field can not be empty';
+        }
     }
-    if(this.password.value === ""){          //?
-        e.preventDefault();
-        alert('Password field can not be empty');
-    }
-    if(!this.checkbox.checked){
-        e.preventDefault();
-        alert('You must agree to the terms and conditions');
+    /* */
+
+    if(isCheckboxValid && isPasswordValid && isEmailValid){
+        error.innerHTML = "";
+        setTimeout(function(){
+            popup.classList.remove('show');
+            successMessage.classList.add('show');
+        },3000)
     }
 }
 
-button.addEventListener('click', toggleClass);
-closeBtn.addEventListener('click', toggleClass);
+clickMeBtn.addEventListener('click', showPopup);
+closeBtn.addEventListener('click', closePopup);
 
-// Form Validation
-form.addEventListener('submit', validateForm);
+form.addEventListener('submit', afterSubmit);

@@ -1,17 +1,15 @@
 /* Here goes your CSS */
 @import 'layout/main';
 
-$popupBackground: white;
-$buttonsBackground: black;
-$buttonsColor: white;
-$submitHoverBackground: #FD878E;
-
-$inputsTextFont: 11px;
+$whiteColor: white;
+$blackColor: black;
+$font-s: 11px;
+$font-m: 12px;
 
 
 .buttons{
-background: $buttonsBackground;
-color: $buttonsColor;
+background: $blackColor;
+color: $whiteColor;
 outline: 0;
 border: none;
 display: flex;
@@ -21,7 +19,7 @@ cursor: pointer;
 }
 
 .popup{
-    background: $popupBackground;
+    background: $whiteColor;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,9 +37,10 @@ cursor: pointer;
         height: 12px;
         width: 12px;
         padding: 5px;
-        font-family: "Lato";
-        font-size: 11px;
+        font-size: 23px;
         font-weight: bold;
+        transform: rotate(45deg);
+        font-family: Arial, sans-serif;
     }
     form{
         display: flex;
@@ -58,26 +57,20 @@ cursor: pointer;
         input {
             padding: 12px;
             margin: 9px;
-            font-size: $inputsTextFont;
-            border: 1px solid rgb(80, 80, 80);
+            font-size: $font-s;
+            border: 1px solid black;
             outline: 0;
         }
-        input[type=submit]{
-            @extend .buttons;
-            text-transform: uppercase;
-
-            &:hover {
-                background: $submitHoverBackground;
-            }
-        }
-        input[type=checkbox] {
+        input[type=checkbox]{
             display: none;
 
             + label {
                 position: relative;
                 padding-left: 36px;
-                font-size: 12px;
-                margin: 8px 0px;
+                font-size: $font-m;
+                margin-top: 8px;
+                user-select: none;
+                -moz-user-select: none;
             }
             + label:before {
                 position: absolute;
@@ -91,16 +84,61 @@ cursor: pointer;
                 border: 1px solid black;
             }
             &:checked + label:before {
-                background: black;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                content: "\f00c";
+            }
+        }
+        .error{
+            height: 14px;
+            line-height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: bottom;
+            color: red;
+            font-size: $font-m;
+        }
+        input[type=submit]{
+            @extend .buttons;
+            text-transform: uppercase;
+
+            &:hover {
+                background: #FD878E;
             }
         }
     }
 }
-.show{
-    display: block;
+.successMessage{
+    display: none;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    opacity: 0;
+    animation: successMessageAnimation 1s; // Success message animation
 }
 
+.show{
+    display: block;
+    opacity: 1;
+}
+.hide{
+    display: none;
+}
 
+.error
+{
+    height: 14px;
+    line-height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: bottom;
+    color: red;
+    font-size: $font-m;
+}
+
+@keyframes successMessageAnimation{
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
 
 
 
