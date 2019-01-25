@@ -1,10 +1,13 @@
 /* Here goes your JS code */
 const clickMeBtn = document.querySelector('.btn');
 const popup = document.querySelector('.popup');
-const closeBtn = document.querySelector('.closeBtn');
+const closeBtn = document.querySelector('.close-btn');
 const form = document.querySelector('.form');
-const successMessage = document.querySelector('.successMessage');
+const successMessage = document.querySelector('.success-message');
 const error = document.querySelector('.error');
+const checkboxInput = form.querySelector("input[type='checkbox']");
+const passwordInput = form.querySelector("input[type='password']");
+const emailInput = document.querySelector("input[type='email']")
 
 function showPopup() {
     popup.classList.toggle('show');
@@ -17,20 +20,20 @@ function closePopup() {
 
 
 function afterSubmit(e){
-    const isCheckboxValid = this.checkbox.checked;
-    const isPasswordValid = this.password.value;
-    const isEmailValid = this.email.value;
+    const isCheckboxValid = checkboxInput.checked;
+    const isPasswordValid = passwordInput.value;
+    const isEmailValid = emailInput.value;
 
     /* Form Validation */
     e.preventDefault();
-    if(this.email.value === "" || this.password.value === "" || !this.checkbox.checked){
-        if(!this.checkbox.checked){
+    if(emailInput.value === "" || passwordInput.value === "" || !checkboxInput.checked){
+        if(!checkboxInput.checked){
             error.innerHTML = ('You must agree to the terms');
         }
-        if(this.password.value === ""){
+        if(passwordInput.value === ""){
             error.innerHTML = ('Password field can not be empty');
         }
-        if(this.email.value === ""){
+        if(emailInput.value === ""){
             error.innerHTML = 'E-mail field can not be empty';
         }
     }
@@ -38,6 +41,10 @@ function afterSubmit(e){
 
     if(isCheckboxValid && isPasswordValid && isEmailValid){
         error.innerHTML = "";
+        checkboxInput.setAttribute("disabled", true);
+        passwordInput.setAttribute("disabled", true);
+        emailInput.setAttribute("disabled", true);
+
         setTimeout(function(){
             popup.classList.remove('show');
             successMessage.classList.add('show');

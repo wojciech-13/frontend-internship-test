@@ -1,25 +1,28 @@
 /* Here goes your CSS */
 @import 'layout/main';
 
-$whiteColor: white;
-$blackColor: black;
-$font-s: 11px;
-$font-m: 12px;
+$color-white: white;
+$color-black: black;
+$color-red: red;
+
+$font-s: 12px;
+$font-m: 22px;
+$font-xl: 50px;
 
 
-.buttons{
-background: $blackColor;
-color: $whiteColor;
-outline: 0;
-border: none;
-display: flex;
-align-items: center;
-justify-content: center;
-cursor: pointer;
+.button{
+    background: $color-black;
+    color: $color-white;
+    outline: 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .popup{
-    background: $whiteColor;
+    background: $color-white;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -28,8 +31,9 @@ cursor: pointer;
     display: none;
     padding: 30px 20px;
 
-    .closeBtn{
-        @extend .buttons;
+    .close-btn{
+        @extend .button;
+
         position: absolute;
         top:-5px;
         right: -5px;
@@ -37,11 +41,12 @@ cursor: pointer;
         height: 12px;
         width: 12px;
         padding: 5px;
-        font-size: 23px;
+        font-size: $font-m;
         font-weight: bold;
         transform: rotate(45deg);
         font-family: Arial, sans-serif;
     }
+
     form{
         display: flex;
         flex-direction: column;
@@ -50,10 +55,11 @@ cursor: pointer;
             margin-bottom: 3px;
             display: flex;
             justify-content: center;
-            font-size: 20px;
+            font-size: $font-m;
             font-family: 'Lobster', sans-serif;
             font-weight: bold;
         }
+
         input {
             padding: 12px;
             margin: 9px;
@@ -61,17 +67,19 @@ cursor: pointer;
             border: 1px solid black;
             outline: 0;
         }
+
         input[type=checkbox]{
             display: none;
 
             + label {
                 position: relative;
                 padding-left: 36px;
-                font-size: $font-m;
+                font-size: $font-s;
                 margin-top: 8px;
                 user-select: none;
                 -moz-user-select: none;
             }
+
             + label:before {
                 position: absolute;
                 content: '';
@@ -83,23 +91,26 @@ cursor: pointer;
                 cursor: pointer;
                 border: 1px solid black;
             }
+
             &:checked + label:before {
                 font-family: "Font Awesome 5 Free";
                 font-weight: 900;
                 content: "\f00c";
             }
         }
+
         .error{
             height: 14px;
             line-height: 22px;
             display: flex;
             justify-content: center;
             align-items: bottom;
-            color: red;
-            font-size: $font-m;
+            color: $color-red;
+            font-size: $font-s;
         }
+
         input[type=submit]{
-            @extend .buttons;
+            @extend .button;
             text-transform: uppercase;
 
             &:hover {
@@ -108,34 +119,23 @@ cursor: pointer;
         }
     }
 }
-.successMessage{
+
+.success-message{
     display: none;
     font-family: 'Lobster', cursive;
-    font-size: 50px;
-    opacity: 0;
-    animation: successMessageAnimation 1s; // Success message animation
+    font-size: $font-xl;
+    animation: success-message-animation 1s; // Success message animation
 }
 
 .show{
     display: block;
-    opacity: 1;
+
 }
 .hide{
     display: none;
 }
 
-.error
-{
-    height: 14px;
-    line-height: 22px;
-    display: flex;
-    justify-content: center;
-    align-items: bottom;
-    color: red;
-    font-size: $font-m;
-}
-
-@keyframes successMessageAnimation{
+@keyframes success-message-animation{
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
